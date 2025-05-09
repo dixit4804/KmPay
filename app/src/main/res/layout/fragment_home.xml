@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainFragment.HomeFragment">
+
+        <!-- Main content container -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!-- Header LinearLayout with icons and text -->
+            <LinearLayout
+                android:id="@+id/linearlayout1"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    app:srcCompat="@drawable/location" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue"
+                    android:layout_marginTop="28dp"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="11dp"
+                    android:text="NY 11434, USA" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    app:srcCompat="@drawable/k3" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="15dp"
+                    app:srcCompat="@drawable/baseline_search_24" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="0dp"
+                    app:srcCompat="@drawable/baseline_notifications_24" />
+
+            </LinearLayout>
+
+            <!-- ScrollView containing content below the header -->
+            <ScrollView
+                android:id="@+id/contentScrollView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/linearlayout1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- CardView with Image Slider and Dot Indicator -->
+                    <LinearLayout
+                        android:id="@+id/cardWithDotsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginTop="8dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="6dp">
+
+                            <androidx.viewpager2.widget.ViewPager2
+                                android:id="@+id/imageSlider"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Dot Indicator centered below the slider -->
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabIndicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="20dp"
+                            android:theme="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog"
+                            app:tabIndicatorHeight="0dp"
+                            app:tabBackground="@drawable/selector_dot"
+                            app:tabMode="fixed" />
+
+                    </LinearLayout>
+
+                    <!-- RecyclerView for products -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/productRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="8dp"
+                        tools:listitem="@layout/item_product_list" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Offer Container -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/offerContainer"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="65dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@color/dark_green"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <VideoView
+                android:id="@+id/offerVideo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/offerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:text="🔥 50% OFF on all shoes!\nBuy now – Hurry up!"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/offerVideo"
+                app:layout_constraintEnd_toEndOf="@+id/offerVideo"
+                app:layout_constraintStart_toStartOf="@+id/offerVideo"
+                app:layout_constraintTop_toTopOf="@+id/offerVideo" />
+
+            <ImageView
+                android:id="@+id/closeOffer"
+                android:layout_width="70dp"
+                android:layout_height="44dp"
+                android:layout_gravity="end"
+                android:padding="8dp"
+                android:src="@drawable/baseline_close_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
