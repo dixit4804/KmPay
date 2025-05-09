@@ -1,5 +1,6 @@
 package com.example.kmpay.MainFragment
 
+import ProductAdapter
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -10,8 +11,13 @@ import android.view.ViewGroup
 import android.widget.MediaController
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.kmpay.Adapter.ImageSliderAdapter
+import com.example.kmpay.Data.Product
+import com.example.kmpay.Data.ProductData
 import com.example.kmpay.R
 import com.example.kmpay.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,6 +27,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var sliderAdapter: ImageSliderAdapter
+    private lateinit var productAdapter: ProductAdapter
     private val handler = Handler(Looper.getMainLooper())
 
     private val imageList = listOf(
@@ -30,8 +37,6 @@ class HomeFragment : Fragment() {
         R.drawable.ele1,
         R.drawable.el2
     )
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,12 +49,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupImageSlider()
         setupOfferPopup()
-
+        setupProductRecyclerView() // Add this new function call
     }
-
-
 
     private fun setupImageSlider() {
         sliderAdapter = ImageSliderAdapter(imageList)
@@ -102,6 +106,35 @@ class HomeFragment : Fragment() {
             }
         }
     }
+//    private fun setupProductRecyclerView() {
+//        productAdapter = ProductAdapter(ProductData.productList) { product ->
+//            navigateToDetailsFragment(product)
+
+    private fun setupProductRecyclerView() {
+    productAdapter = ProductAdapter(ProductData.productList) { product ->            // Handle item click - navigate to DetailsFragment
+            navigateToDetailsFragment(product)
+        }
+
+        binding.productRecyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = productAdapter
+//            addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun navigateToDetailsFragment(product: Product) {
+        val bundle = Bundle().apply {
+            putParcelable("product", product)
+        }
+
+        parentFragmentManager.commit {
+            replace(R.id.fragment_container, ProductDetailFragment().apply {
+                arguments = bundle
+            })
+            addToBackStack("product_details")
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -109,3 +142,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+

@@ -41,6 +41,8 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding = true // Optional (if you want both)
+
     }
 }
 
@@ -62,4 +64,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation (libs.material.v1110)
+
 }
