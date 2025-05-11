@@ -5,16 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.kmpay.Data.Product
+import com.example.kmpay.activity.MainActivity
 import com.example.kmpay.R
+import com.example.kmpay.ViewModel.CartViewModel
 import com.example.kmpay.databinding.FragmentProductDetailBinding
 
 class ProductDetailFragment : Fragment() {
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var product: Product
+    private val cartViewModel: CartViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,13 +97,17 @@ class ProductDetailFragment : Fragment() {
             returnPolicyText.text = "Return Policy: ${product.returnPolicy}"
             deliveryInfoText.text = "Delivery: ${product.deliveryInfo ?: "Standard shipping 3-5 days"}"
 
-            // Button Actions
+            // Button Actions - Updated with CartViewModel functionality
             addToCartButton.setOnClickListener {
-                // Add to cart logic
+                cartViewModel.addToCart(product)
+                Toast.makeText(requireContext(), "${product.name} added to cart", Toast.LENGTH_SHORT).show()
             }
 
             buyNowButton.setOnClickListener {
-                // Buy now logic
+                cartViewModel.addToCart(product)
+                (activity as? MainActivity)?.navigateToCart() ?: run {
+                    Toast.makeText(requireContext(), "Could not proceed to cart", Toast.LENGTH_SHORT).show()
+                }
             }
 
             // Hide sections if empty

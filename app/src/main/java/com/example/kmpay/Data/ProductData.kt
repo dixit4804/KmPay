@@ -398,7 +398,7 @@ object ProductData {
             id = 23,
             name = "Sofa",
             price = 13000,
-            image = R.drawable.sofa,
+            image = R.drawable.sofac,
             details = "3-seater fabric sofa with wood frame",
             warranty = "5 years frame",
             rating = 4.7f,

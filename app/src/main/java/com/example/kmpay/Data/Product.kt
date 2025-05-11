@@ -29,7 +29,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Product(
+//    val product: Product,
     val id: Int,
+    var quantity: Int = 1,
     val name: String,
     val price: Int,
     @DrawableRes val image: Int,

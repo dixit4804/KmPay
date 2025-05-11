@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+
 //    id("androidx.navigation.safeargs.kotlin")
     // Uncomment if using Safe Args for Navigation
     // alias(libs.plugins.androidx.navigation.safeargs.kotlin)
@@ -66,5 +67,11 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation (libs.material.v1110)
+
+
+//    implementation (libs.androidx.cardview)
+
+//    classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")  // Add this line
+
 
 }
